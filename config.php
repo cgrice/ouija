@@ -1,5 +1,8 @@
 <?php
 
+include 'vendor/autoload.php';
+include 'inc/functions.php';
+
 error_reporting(E_ALL);
 ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
@@ -22,11 +25,14 @@ $sites = array(
 );
 
 // Do not change values below this line
+if(defined('STDIN') == FALSE)  {
 
-$request_uri = substr(strrchr($_SERVER['REQUEST_URI'],'/'), 1);
-$root = substr($_SERVER['REQUEST_URI'], 0, - strlen($request_uri));
+    $request_uri = substr(strrchr($_SERVER['REQUEST_URI'],'/'), 1);
+    $root = substr($_SERVER['REQUEST_URI'], 0, - strlen($request_uri));
 
-define('TESTSUITE_ROOT', $root);
+    define('TESTSUITE_ROOT', $root);
+
+}
 
 // Sanity checks!
 exec('which phantomjs', $output);
